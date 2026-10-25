@@ -21,36 +21,6 @@ Backlog de funcionalidades y mejoras **todavía no implementadas**. Este fichero
 
 ---
 
-## MEJ-002 · Esqueleto de la aplicación y ejecutable
-
-- **Qué:** la aplicación arranca, muestra una ventana principal vacía y se distribuye como `pxls.exe`.
-- **Por qué:** el ejecutable debe existir desde la primera versión; conviene resolver el empaquetado antes de que haya funcionalidad.
-- **Dudas:** un único fichero `.exe` o carpeta con el `.exe` y sus dependencias; icono; título de la ventana.
-
-## MEJ-003 · Modelo de color y formatos
-
-- **Qué:** representar un color con canal alfa y convertirlo entre HEX `#RRGGBBAA`, RGB, HSL y HSV.
-- **Por qué:** es el núcleo sobre el que se apoyan el cuentagotas, el selector, el portapapeles, el historial y las paletas.
-- **Dudas:** ¿se aceptan también como entrada `#RRGGBB` y `#RGB`?; cómo se muestra el alfa en RGB, HSL y HSV (`rgba()`, `hsla()`, porcentaje, 0–255); redondeo de los valores mostrados.
-
-## MEJ-004 · Cuentagotas de pantalla
-
-- **Qué:** capturar el color de cualquier píxel de la pantalla, con una lupa para apuntar con precisión.
-- **Por qué:** es la función principal de un color picker de escritorio.
-- **Dudas:** cómo se activa (botón, atajo global); varios monitores y escalado de pantalla (DPI); cómo se cancela.
-
-## MEJ-005 · Selector visual
-
-- **Qué:** elegir un color con un cuadrado de saturación y brillo, una barra de tono y controles para el alfa y para cada componente.
-- **Por qué:** permite crear colores, no sólo capturarlos.
-- **Dudas:** modelo del selector (HSV es lo habitual); si los valores se pueden escribir a mano en cada formato.
-
-## MEJ-006 · Copiar al portapapeles
-
-- **Qué:** copiar el color actual en el formato elegido.
-- **Por qué:** es como el color llega a otras herramientas.
-- **Dudas:** formato por defecto; si se puede copiar en todos los formatos; atajo de teclado.
-
 ## MEJ-007 · Historial
 
 - **Qué:** recordar los últimos colores elegidos, también entre sesiones.
@@ -68,3 +38,9 @@ Backlog de funcionalidades y mejoras **todavía no implementadas**. Este fichero
 - **Qué:** que las reglas de clase traten `conftest.py` y los módulos auxiliares bajo `tests/` como ficheros de test.
 - **Por qué:** hoy (ANCH-025 y glosario de `specs/spec-anchor/spec.md`) sólo cuentan como ficheros de test los `test_*.py`; un `chore` podría cambiar un `conftest.py` y alterar el comportamiento de los tests sin tocar ninguna spec.
 - **Dudas:** si los helpers de `tests/` deben llevar también `Spec:` como los módulos anclados.
+
+## MEJ-010 · `spec-anchor`: mostrar el progreso de la verificación completa
+
+- **Qué:** que la verificación completa vaya mostrando qué puerta está ejecutando (formato, tipos, tests…) y cuánto ha tardado cada una.
+- **Por qué:** durante un commit el hook tarda alrededor de un minuto sin mostrar nada y parece colgado; el primer commit de la fase 2 se interrumpió con Ctrl+C por eso.
+- **Dudas:** si se muestra siempre o sólo en los hooks; formato de las líneas de progreso.

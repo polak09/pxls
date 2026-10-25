@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <!-- Icono de pxls: cuatro «píxeles» de color y un cuentagotas. Fuente de pxls.ico. -->
+  <!-- Cada cuadrante lleva su esquina redondeada: QtSvg (SVG Tiny) no admite clip-path. -->
+  <path d="M8 60 A52 52 0 0 1 60 8 H128 V128 H8 Z" fill="#FF5A5F"/>
+  <path d="M128 8 H196 A52 52 0 0 1 248 60 V128 H128 Z" fill="#FFC23D"/>
+  <path d="M8 128 H128 V248 H60 A52 52 0 0 1 8 196 Z" fill="#2EC4B6"/>
+  <path d="M128 128 H248 V196 A52 52 0 0 1 196 248 H128 Z" fill="#3A86FF"/>
+  <g transform="rotate(45 128 128)">
+    <rect x="106" y="30" width="44" height="52" rx="18" fill="#1F2937"/>
+    <rect x="92" y="78" width="72" height="20" rx="10" fill="#1F2937"/>
+    <path d="M112 98 H144 V182 L128 214 L112 182 Z" fill="#FFFFFF" stroke="#1F2937"
+          stroke-width="10" stroke-linejoin="round"/>
+    <path d="M118 160 H138 V182 L128 202 L118 182 Z" fill="#3A86FF"/>
+  </g>
+</svg>
