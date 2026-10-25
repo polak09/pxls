@@ -11,7 +11,7 @@ Plan del proyecto descompuesto en tareas individuales y medibles. Es el fichero 
 - Las tareas de las fases 3 a 9 son una primera descomposición. Cuando su spec queda aprobada se refinan: se dividen, se añaden o se retiran. Una tarea retirada se tacha (`~~T-NNN~~`), no se borra.
 - Al cerrar cualquier fase de producto se puede publicar una versión intermedia en `main`; se añade como tarea.
 
-**Leyenda:** ⬜ pendiente · 🔄 en curso · ✅ hecha · ⛔ bloqueada
+**Leyenda:** ⬜ pendiente · 🔄 en curso · ✅ hecha · ⛔ bloqueada · ~~tachada~~ retirada (no cuenta en los totales)
 
 ### Criterios estándar
 
@@ -31,14 +31,14 @@ Hasta que existan `spec-anchor` y los hooks (T-019 a T-021), la verificación es
 ## Dónde estamos
 
 - **En curso:** —
-- **Siguiente:** T-005 y T-006 (Bartosz).
+- **Siguiente:** T-023 (Bartosz): commit de la fase 2 en `dev`. Pendiente de Bartosz: T-006.
 - **Bloqueos:** —
 
 | Fase | Hechas |
 |---|---|
-| 0 · Gobierno del proyecto | 4 / 6 |
-| 1 · Base técnica | 0 / 5 |
-| 2 · MEJ-001 · `spec-anchor` y hooks | 0 / 12 |
+| 0 · Gobierno del proyecto | 5 / 6 |
+| 1 · Base técnica | 4 / 4 |
+| 2 · MEJ-001 · `spec-anchor` y hooks | 11 / 12 |
 | 3 · MEJ-002 · Esqueleto y ejecutable | 0 / 7 |
 | 4 · MEJ-003 · Modelo de color y formatos | 0 / 8 |
 | 5 · MEJ-004 · Cuentagotas de pantalla | 0 / 9 |
@@ -47,7 +47,7 @@ Hasta que existan `spec-anchor` y los hooks (T-019 a T-021), la verificación es
 | 8 · MEJ-007 · Historial | 0 / 8 |
 | 9 · MEJ-008 · Paletas de color | 0 / 9 |
 | 10 · Primera versión | 0 / 2 |
-| **Total** | **4 / 81** |
+| **Total** | **20 / 80** |
 
 ---
 
@@ -59,7 +59,7 @@ Hasta que existan `spec-anchor` y los hooks (T-019 a T-021), la verificación es
 | T-002 | Crear el backlog inicial | IA | `mejoras.md` contiene MEJ-001 a MEJ-008. | ✅ |
 | T-003 | Descomponer el proyecto en tareas | IA | Este fichero existe y cada mejora de `mejoras.md` tiene su fase. | ✅ |
 | T-004 | Ratificar la enmienda 1.1.0: `tareas.md` y ficheros no anclados en `behavior`/`refactor` | Bartosz + IA | `CONSTITUTION.md` v1.1.0 en estado RATIFICADA. | ✅ |
-| T-005 | Integrar los ficheros de gobierno en `dev` | Bartosz | `dev` contiene un commit `Change-Type: constitution` con `CONSTITUTION.md`, `mejoras.md` y `tareas.md`, y `git status` está limpio. | ⬜ |
+| T-005 | Integrar los ficheros de gobierno en `dev` | Bartosz | `dev` contiene un commit `Change-Type: constitution` con `CONSTITUTION.md`, `mejoras.md` y `tareas.md`, y `git status` está limpio. | ✅ |
 | T-006 | Corregir el upstream de `dev` (hoy apunta a `origin/main`) y publicar `dev` en GitHub | Bartosz | `git status -sb` muestra `dev...origin/dev`. | ⬜ |
 
 ## Fase 1 · Base técnica
@@ -68,11 +68,11 @@ Clase `chore`.
 
 | ID | Tarea | Quién | Hecho cuando | Estado |
 |---|---|---|---|---|
-| T-007 | Crear el proyecto `uv` | IA | Existen `pyproject.toml` (Python 3.13, paquete `pxls` en `src/`), `uv.lock`, `.gitignore` y las carpetas `src/pxls/core`, `src/pxls/adapters`, `src/pxls/ui`, `tests/` y `tools/`; `uv sync` y `uv run python -c "import pxls"` terminan sin error. | ⬜ |
-| T-008 | Configurar formato, lint y tipos | IA | `uv run ruff format --check`, `uv run ruff check` y `uv run mypy` (con `strict` en `pyproject.toml`) pasan sin avisos. | ⬜ |
-| T-009 | Configurar tests y cobertura | IA | `pytest` tiene el marcador `spec` registrado y `--strict-markers` activo (`uv run pytest --markers` lo lista); Hypothesis está instalado; la cobertura por ramas tiene configurados los umbrales del Artículo X (`core` ≥ 95 %, total ≥ 85 %). | ⬜ |
-| T-010 | Configurar los contratos de arquitectura | IA | `import-linter` tiene los contratos del Artículo VIII (`core` no importa `adapters`, `ui` ni PySide6; `adapters` no importa `ui`) y `uv run lint-imports` pasa. | ⬜ |
-| T-011 | Integrar la base técnica | Bartosz | Criterio estándar *Integrar* (`Change-Type: chore`). | ⬜ |
+| T-007 | Crear el proyecto `uv` | IA | Existen `pyproject.toml` (Python 3.13, paquete `pxls` en `src/`), `uv.lock`, `.gitignore` y las carpetas `src/pxls/core`, `src/pxls/adapters`, `src/pxls/ui`, `tests/` y `tools/`; `uv sync` y `uv run python -c "import pxls"` terminan sin error. | ✅ |
+| T-008 | Configurar formato, lint y tipos | IA | `uv run ruff format --check`, `uv run ruff check` y `uv run mypy` (con `strict` en `pyproject.toml`) pasan sin avisos. | ✅ |
+| T-009 | Configurar tests y cobertura | IA | `pytest` tiene el marcador `spec` registrado y `--strict-markers` activo (`uv run pytest --markers` lo lista); Hypothesis está instalado; la cobertura por ramas tiene configurados los umbrales del Artículo X (`core` ≥ 95 %, total ≥ 85 %). | ✅ |
+| T-010 | Configurar los contratos de arquitectura | IA | `import-linter` tiene los contratos del Artículo VIII (`core` no importa `adapters`, `ui` ni PySide6; `adapters` no importa `ui`) y `uv run lint-imports` pasa. | ✅ |
+| ~~T-011~~ | ~~Integrar la base técnica~~ | Bartosz | Retirada: la base técnica va en el commit de T-023. | — |
 
 ## Fase 2 · MEJ-001 · Checker `spec-anchor` y hooks
 
@@ -80,18 +80,18 @@ Spec `specs/spec-anchor/spec.md` · prefijo `ANCH`.
 
 | ID | Tarea | Quién | Hecho cuando | Estado |
 |---|---|---|---|---|
-| T-012 | Redactar la spec en `draft` | IA | La spec tiene todas las secciones del Artículo V, y cada invariante (INV-1 a INV-7), cada clase de cambio, los trailers, los dos niveles de verificación y las dos capas de cumplimiento tienen al menos un requisito. Las dudas quedan como `[NEEDS CLARIFICATION]`. | ⬜ |
-| T-013 | Aprobar la spec | Bartosz | Criterio estándar *Aprobar*. | ⬜ |
-| T-014 | Escribir el diseño | IA | `specs/spec-anchor/design.md` describe los módulos, la interfaz de línea de comandos, el formato de los errores y justifica cada dependencia. | ⬜ |
-| T-015 | Implementar la lectura de specs e INV-1 | IA | *Implementar* + detecta IDs duplicados o mal formados y `[NEEDS CLARIFICATION]` en requisitos `approved` o `implemented`. | ⬜ |
-| T-016 | Implementar la lectura de tests y código e INV-2 a INV-4 | IA | *Implementar* + detecta tests sin marcador, módulos sin `Spec:` y referencias a IDs inexistentes, `retired` o `MEJ`. | ⬜ |
-| T-017 | Implementar INV-5 a INV-7 | IA | *Implementar* + detecta requisitos `implemented` sin test o sin módulo, requisitos `draft`/`approved` y tests que fallan. | ⬜ |
-| T-018 | Implementar las reglas de clase de cambio y los trailers | IA | *Implementar* + para cada una de las 5 clases hay al menos un caso válido y uno inválido probados, y se rechazan los trailers ausentes o mal formados. | ⬜ |
-| T-019 | Implementar la verificación rápida y la completa | IA | *Implementar* + los dos niveles se ejecutan desde la línea de comandos, devuelven 0 si todo está bien y un código distinto con un informe legible si no. La completa ejecuta todas las puertas del Artículo X disponibles; el empaquetado se añade en T-028. | ⬜ |
-| T-020 | Implementar los hooks de git | IA | *Implementar* + un único comando instala `pre-commit`, `pre-merge-commit` y `commit-msg`; se rechaza un commit con un test sin marcador y un commit sin trailers. | ⬜ |
-| T-021 | Implementar la integración con Claude Code | IA | *Implementar* + `CLAUDE.md` remite a la constitución y a `tareas.md`; un hook de fin de turno ejecuta la verificación rápida; se bloquean `--no-verify` y los commits hechos por el agente. Cada regla está probada con un caso que pasa y uno que falla. | ⬜ |
-| T-022 | Cerrar MEJ-001 | IA | Criterio estándar *Cerrar*. | ⬜ |
-| T-023 | Integrar MEJ-001 | Bartosz | Criterio estándar *Integrar* (`Change-Type: behavior`), ya con los hooks nuevos instalados. | ⬜ |
+| T-012 | Redactar la spec en `draft` | IA | La spec tiene todas las secciones del Artículo V, y cada invariante (INV-1 a INV-7), cada clase de cambio, los trailers, los dos niveles de verificación y las dos capas de cumplimiento tienen al menos un requisito. Las dudas quedan como `[NEEDS CLARIFICATION]`. | ✅ |
+| T-013 | Aprobar la spec | Bartosz | Criterio estándar *Aprobar*. | ✅ |
+| T-014 | Escribir el diseño | IA | `specs/spec-anchor/design.md` describe los módulos, la interfaz de línea de comandos, el formato de los errores y justifica cada dependencia. | ✅ |
+| T-015 | Implementar la lectura de specs e INV-1 | IA | *Implementar* + detecta IDs duplicados o mal formados y `[NEEDS CLARIFICATION]` en requisitos `approved` o `implemented`. | ✅ |
+| T-016 | Implementar la lectura de tests y código e INV-2 a INV-4 | IA | *Implementar* + detecta tests sin marcador, módulos sin `Spec:` y referencias a IDs inexistentes, `retired` o `MEJ`. | ✅ |
+| T-017 | Implementar INV-5 a INV-7 | IA | *Implementar* + detecta requisitos `implemented` sin test o sin módulo, requisitos `draft`/`approved` y tests que fallan. | ✅ |
+| T-018 | Implementar las reglas de clase de cambio y los trailers | IA | *Implementar* + para cada una de las 5 clases hay al menos un caso válido y uno inválido probados, y se rechazan los trailers ausentes o mal formados. | ✅ |
+| T-019 | Implementar la verificación rápida y la completa | IA | *Implementar* + los dos niveles se ejecutan desde la línea de comandos, devuelven 0 si todo está bien y un código distinto con un informe legible si no. La completa ejecuta todas las puertas del Artículo X disponibles; el empaquetado se añade en T-028. Cubre ANCH-030 a ANCH-037. | ✅ |
+| T-020 | Implementar los hooks de git | IA | *Implementar* + un único comando instala `pre-commit`, `pre-merge-commit` y `commit-msg`; se rechaza un commit con un test sin marcador y un commit sin trailers. Cubre ANCH-028, ANCH-029 y ANCH-038 a ANCH-041. | ✅ |
+| T-021 | Implementar la integración con Claude Code | IA | *Implementar* + `CLAUDE.md` remite a la constitución y a `tareas.md`; un hook de fin de turno ejecuta la verificación rápida; se bloquean `--no-verify` y los commits hechos por el agente. Cada regla está probada con un caso que pasa y uno que falla. Cubre ANCH-042 a ANCH-047. | ✅ |
+| T-022 | Cerrar MEJ-001 | IA | Criterio estándar *Cerrar*. | ✅ |
+| T-023 | Integrar MEJ-001 | Bartosz | Criterio estándar *Integrar* (`Change-Type: behavior`), ya con los hooks nuevos instalados. El commit incluye también la base técnica de la fase 1. | ⬜ |
 
 ## Fase 3 · MEJ-002 · Esqueleto de la aplicación y ejecutable
 
@@ -211,6 +211,27 @@ Spec `specs/palettes/spec.md` · prefijo `PAL`.
 
 Las entradas más recientes van primero.
 
+- 2026-10-25 · T-022 · Completada: Bartosz aprueba el nuevo texto de ANCH-013 y pasa a `implemented`; los 47 requisitos de `specs/spec-anchor/spec.md` están `implemented` y la verificación rápida da 0 errores. La completa se ejecutará en el hook del commit de T-023.
+- 2026-10-25 · T-022 · 46 requisitos pasan a `implemented` y MEJ-001 sale de `mejoras.md`. La verificación completa de la fase (suite entera, cobertura 94 %) sólo da INV-6 por ANCH-013. El checker destapó que las listas `Spec:` partidas en dos líneas perdían IDs (ANCH-017 y ANCH-027): se propone ampliar ANCH-013 con líneas de continuación (en `draft`). ANCH-042 se ancla en `claude.py`. Anexo C revisado: 98 criterios de aceptación con test.
+- 2026-10-25 · T-022 · Asignada a la IA.
+- 2026-10-25 · Bartosz instala los hooks de git en el clon; la verificación rápida da 0 errores.
+- 2026-10-25 · T-021 · Completada: `CLAUDE.md`, configuración de Claude Code y `spec_anchor.claude` (ANCH-042 a ANCH-047); 32 tests vistos en rojo y luego en verde. Los hooks se activaron en la misma sesión y bloquearon dos comandos reales del agente (ANCH-046 y ANCH-045).
+- 2026-10-25 · Bartosz aprueba el nuevo texto de ANCH-022 (exención de los módulos sin definiciones); vuelve a `approved`.
+- 2026-10-25 · T-020 · Completada: `hooks` (instalación, hooks ajenos, aviso de hooks no instalados) y `spec-anchor hook` para `pre-commit`, `pre-merge-commit` y `commit-msg` (ANCH-028, ANCH-029, ANCH-038 a ANCH-041); probados con commits y merges reales en repositorios temporales; 151 tests. Hallazgos: ANCH-022 contradecía la exención de la constitución III.3 (propuesto nuevo texto, en `draft`); `pre-merge-commit` no dispone de `MERGE_HEAD`; las puertas eliminan las variables `GIT_*` para no tocar el repositorio real.
+- 2026-10-25 · Acordado con Bartosz: la suite completa se ejecuta una vez por fase; durante las tareas, sólo los tests nuevos.
+- 2026-10-25 · T-019 · Completada: comando `spec-anchor check --quick/--full` (ANCH-030 a ANCH-037); 133 tests, cobertura 98 %. Sobre el propio repositorio la rápida da 0 errores en 0,75 s y la completa sólo los 47 INV-6 esperados (requisitos aún `approved`).
+- 2026-10-25 · T-018 · Completada: `changes` con trailers y reglas de las 5 clases (ANCH-019 a ANCH-027); 106 tests vistos en rojo y luego en verde, cobertura 99,85 %. Requisitos ANCH con tests: 27 de 47; los restantes quedan repartidos explícitamente entre T-019, T-020 y T-021.
+- 2026-10-25 · T-017 · Completada: INV-5 a INV-7 (ANCH-016 a ANCH-018) en `invariants` y `gates.run_tests`; 64 tests vistos en rojo y luego en verde, cobertura 99,8 %.
+- 2026-10-25 · T-011 · Retirada por decisión de Bartosz: la base técnica se integra en el commit `behavior` de T-023.
+- 2026-10-24 · T-016 · Completada: `pyrefs` y comprobaciones INV-2 a INV-4 (ANCH-011 a ANCH-015); 53 tests vistos en rojo y luego en verde, cobertura 99,7 %. El propio repositorio pasa INV-1 a INV-4 sin errores.
+- 2026-10-24 · T-015 · Completada: `model`, `tree`, `specs` e `invariants` (ANCH-001 a ANCH-010); 31 tests vistos en rojo y luego en verde, cobertura 99,6 %, todas las puertas pasan. Lee la spec real sin errores.
+- 2026-10-24 · T-014 · Completada: `specs/spec-anchor/design.md` (sin dependencias de ejecución, 12 módulos, CLI y reparto entre hooks).
+- 2026-10-24 · T-013 · Completada: Bartosz aprueba `specs/spec-anchor/spec.md`; sus 47 requisitos pasan a `approved`.
+- 2026-10-24 · T-013 · Bartosz acepta las propuestas de la IA para las 9 dudas; la IA las aplica a `specs/spec-anchor/spec.md` (0 dudas abiertas). La duda de ANCH-043 se separa en un requisito nuevo, ANCH-047: 47 requisitos, todos en `draft`.
+- 2026-10-24 · T-012 · Completada: `specs/spec-anchor/spec.md` con 46 requisitos en `draft`, trazabilidad completa con la constitución y 9 dudas abiertas.
+- 2026-10-24 · T-008 a T-010 · Completadas: ruff, mypy strict, pytest con marcador `spec`, cobertura (total 85 %; el 95 % de `core` lo aplicará T-019) e import-linter pasan.
+- 2026-10-24 · T-007 · Completada: proyecto `uv` con Python 3.13.15, `uv sync` e `import pxls` sin errores.
+- 2026-10-24 · T-005 · Completada: commit `3c668e8` en `dev`.
 - 2026-10-24 · Enmienda 2.0.0 de la constitución: sin ramas de trabajo, todo en `dev`; tareas adaptadas.
 - 2026-10-24 · T-004 · Completada: enmienda 1.1.0 ratificada por Bartosz y aplicada por la IA en `CONSTITUTION.md`.
 - 2026-10-24 · T-003 · Asignada a la IA y completada: plan de 81 tareas en 11 fases.

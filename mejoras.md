@@ -21,12 +21,6 @@ Backlog de funcionalidades y mejoras **todavía no implementadas**. Este fichero
 
 ---
 
-## MEJ-001 · Checker `spec-anchor` y hooks
-
-- **Qué:** herramienta que verifica los invariantes (Artículo III) y las reglas de cambio (Artículo II) de la constitución, con sus dos niveles de verificación (rápida y completa). Incluye los hooks de git y los de Claude Code (Artículo XI).
-- **Por qué:** la constitución exige que exista antes que cualquier capacidad de producto (Artículo XI.4).
-- **Dudas:** con qué comando se instalan los hooks tras clonar; formato de los informes de error; cuánto puede tardar la verificación completa (incluye generar el `.exe`).
-
 ## MEJ-002 · Esqueleto de la aplicación y ejecutable
 
 - **Qué:** la aplicación arranca, muestra una ventana principal vacía y se distribuye como `pxls.exe`.
@@ -68,3 +62,9 @@ Backlog de funcionalidades y mejoras **todavía no implementadas**. Este fichero
 - **Qué:** crear, nombrar, editar y guardar paletas de colores.
 - **Por qué:** organizar los colores de un proyecto.
 - **Dudas:** número de paletas y de colores por paleta; reordenar colores; exportar e importar (y en qué formatos).
+
+## MEJ-009 · `spec-anchor`: proteger también los ficheros auxiliares de los tests
+
+- **Qué:** que las reglas de clase traten `conftest.py` y los módulos auxiliares bajo `tests/` como ficheros de test.
+- **Por qué:** hoy (ANCH-025 y glosario de `specs/spec-anchor/spec.md`) sólo cuentan como ficheros de test los `test_*.py`; un `chore` podría cambiar un `conftest.py` y alterar el comportamiento de los tests sin tocar ninguna spec.
+- **Dudas:** si los helpers de `tests/` deben llevar también `Spec:` como los módulos anclados.

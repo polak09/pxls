@@ -1,0 +1,90 @@
+[project]
+name = "pxls"
+version = "0.0.0"
+description = "Color picker de escritorio para Windows."
+readme = "README.md"
+license = "MIT"
+authors = [{ name = "Bartosz Kucmierz" }]
+requires-python = ">=3.13,<3.14"
+dependencies = []
+
+[project.scripts]
+spec-anchor = "spec_anchor.cli:main"
+
+[dependency-groups]
+dev = [
+    "hypothesis>=6.100,<7",
+    "import-linter>=2.1,<3",
+    "mypy>=1.13,<2",
+    "pytest>=8.3,<9",
+    "pytest-cov>=6.0,<8",
+    "ruff>=0.8,<1",
+]
+
+[build-system]
+requires = ["hatchling>=1.25,<2"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/pxls", "tools/spec_anchor"]
+
+[tool.uv]
+python-downloads = "never"
+
+# --- Formato y lint (Artículo X) ---
+[tool.ruff]
+line-length = 100
+target-version = "py313"
+src = ["src", "tests", "tools"]
+
+[tool.ruff.lint]
+select = ["E", "W", "F", "I", "B", "UP", "SIM", "RUF", "N", "D"]
+ignore = ["D203", "D213"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["D"]
+
+# --- Tipos (Artículo X) ---
+[tool.mypy]
+strict = true
+python_version = "3.13"
+files = ["src", "tools", "tests"]
+mypy_path = ["src", "tools"]
+explicit_package_bases = true
+
+# --- Tests (Artículos III.2 y X) ---
+[tool.pytest.ini_options]
+minversion = "8.3"
+testpaths = ["tests"]
+addopts = ["--strict-markers", "--strict-config", "--import-mode=importlib"]
+markers = [
+    "spec(*ids): requisitos que prueba el test, p. ej. spec(\"CONV-001\") (Constitución III.2)",
+]
+
+# --- Cobertura (Artículo X) ---
+# Umbral total: 85 %. El umbral de `core` (95 %) lo aplica la verificación completa
+# con `coverage report --include="src/pxls/core/*" --fail-under=95` (T-019).
+[tool.coverage.run]
+branch = true
+source = ["src/pxls", "tools/spec_anchor"]
+
+[tool.coverage.report]
+fail_under = 85
+show_missing = true
+skip_empty = true
+
+# --- Arquitectura (Artículo VIII) ---
+[tool.importlinter]
+root_package = "pxls"
+include_external_packages = true
+
+[[tool.importlinter.contracts]]
+name = "Capas: ui > adapters > core"
+type = "layers"
+layers = ["pxls.ui", "pxls.adapters", "pxls.core"]
+
+[[tool.importlinter.contracts]]
+name = "core es dominio puro (sin PySide6)"
+type = "forbidden"
+source_modules = ["pxls.core"]
+forbidden_modules = ["PySide6"]
