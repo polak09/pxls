@@ -95,10 +95,11 @@ Capturar el color exacto de cualquier píxel visible en la pantalla y convertirl
 ### PICK-009 · Panel del color actual
 
 - **Estado:** implemented
-- **Enunciado (EARS):** El sistema deberá mostrar en la ventana principal una muestra del color actual y su valor en HEX, RGB, HSL y HSV, con los formatos de `specs/color-model/spec.md`, y actualizarlos cada vez que cambie el color actual.
+- **Enunciado (EARS):** El sistema deberá mostrar en la ventana principal una muestra del color actual, a la derecha de la barra de tono del selector (SEL-001, `specs/visual-picker/spec.md`), con su mismo alto y todo el ancho que queda hasta el borde derecho del contenido, y su valor en HEX, RGB, HSL y HSV, con los formatos de `specs/color-model/spec.md`, y actualizarlos cada vez que cambie el color actual.
 - **Criterios de aceptación:**
   1. Dado el color actual R 255, G 136, B 0, A 255, cuando se observa el panel, entonces la muestra es de ese color y los valores son `#FF8800FF`, `rgb(255, 136, 0)`, `hsl(32, 100%, 50%)` y `hsv(32, 100%, 100%)`.
   2. Dado un color capturado con el cuentagotas, cuando termina la captura, entonces el panel muestra el nuevo color.
+  3. Dada la ventana principal con su tamaño inicial, cuando se observa, entonces la muestra está a la derecha de la barra de tono, con su mismo alto, y llega hasta el borde derecho del contenido.
 
 ### PICK-010 · Color actual al arrancar
 

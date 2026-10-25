@@ -1,6 +1,6 @@
 """Selector visual: cuadrado de saturación y valor, barra de tono y barra y campo por componente.
 
-Spec: SEL-001, SEL-002, SEL-003, SEL-004, SEL-005, SEL-006, SEL-008, CLIP-002
+Spec: SEL-001, SEL-002, SEL-003, SEL-004, SEL-005, SEL-006, SEL-008, CLIP-002, PICK-009
 """
 
 from functools import partial
@@ -299,8 +299,12 @@ class ComponentRows(QWidget):
 class SelectorWidget(QWidget):
     """Selector visual conectado al color actual de la sesión (SEL-008)."""
 
-    def __init__(self, session: PickerSession) -> None:
-        """Crea el selector y lo sincroniza con el color actual de ``session``."""
+    def __init__(self, session: PickerSession, swatch: QWidget | None = None) -> None:
+        """Crea el selector y lo sincroniza con el color actual de ``session``.
+
+        ``swatch``, la muestra del color actual, ocupa el hueco a la derecha de la barra de tono
+        con su mismo alto (PICK-009).
+        """
         super().__init__()
         self.session = session
         self.state = SelectorState(session.current)
@@ -310,7 +314,11 @@ class SelectorWidget(QWidget):
         top = QHBoxLayout()
         top.addWidget(self.square)
         top.addWidget(self.hue_bar)
-        top.addStretch()
+        if swatch is None:
+            top.addStretch()
+        else:
+            swatch.setFixedHeight(HUE_BAR_HEIGHT)
+            top.addWidget(swatch, 1)
         layout = QVBoxLayout(self)
         layout.setContentsMargins(0, 0, 0, 0)
         layout.addLayout(top)

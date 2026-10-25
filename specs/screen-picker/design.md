@@ -19,7 +19,7 @@ Documento informativo (constitución V.7). Describe *cómo* se implementa [spec.
 | `core` | `pxls/core/magnifier.py` | Celdas de la lupa (11 × 11 colores alrededor de un punto; `None` fuera del escritorio) y posición de la lupa para que quepa en la pantalla. | PICK-003 |
 | `adapters` | `pxls/adapters/windows_screen.py` | `WindowsScreenGrabber` (GDI) y `WindowsPointer` (cursor), con el hilo *per-monitor DPI aware v2* en cada llamada. | PICK-002, PICK-007, PICK-008 |
 | `ui` | `pxls/ui/picker_overlay.py` | Ventanas superpuestas: pintan la captura y la lupa y traducen ratón y teclado a la `PickerSession`. | PICK-001, PICK-003 a PICK-006 |
-| `ui` | `pxls/ui/color_panel.py` | Muestra del color actual y sus cuatro formatos. | PICK-009, PICK-010 |
+| `ui` | `pxls/ui/color_panel.py` | Muestra del color actual y sus cuatro formatos. La muestra no va en la rejilla del panel: el selector la coloca a la derecha de la barra de tono (`pxls/ui/selector.py`). | PICK-009, PICK-010 |
 | `ui` | `pxls/ui/main_window.py` | Botón «Capturar color», atajo `Ctrl+Mayús+C` y panel. | PICK-001, PICK-009 |
 
 La capa `ui` crea el adaptador real y se lo pasa a la sesión; los tests le pasan *fakes* (constitución VII.4).

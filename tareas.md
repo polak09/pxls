@@ -31,7 +31,7 @@ Hasta que existan `spec-anchor` y los hooks (T-019 a T-021), la verificación es
 ## Dónde estamos
 
 - **En curso:** —
-- **Siguiente:** T-030, T-038, T-047, T-056 y T-062 (Bartosz): un único commit con las fases 3 a 7. Después, T-063 (IA).
+- **Siguiente:** T-070 (Bartosz): probar el historial y la nueva muestra con `uv run pxls` y hacer el commit de la fase 8.
 - **Bloqueos:** —
 
 | Fase | Hechas |
@@ -39,15 +39,15 @@ Hasta que existan `spec-anchor` y los hooks (T-019 a T-021), la verificación es
 | 0 · Gobierno del proyecto | 6 / 6 |
 | 1 · Base técnica | 4 / 4 |
 | 2 · MEJ-001 · `spec-anchor` y hooks | 12 / 12 |
-| 3 · MEJ-002 · Esqueleto y ejecutable | 6 / 7 |
-| 4 · MEJ-003 · Modelo de color y formatos | 7 / 8 |
-| 5 · MEJ-004 · Cuentagotas de pantalla | 8 / 9 |
-| 6 · MEJ-005 · Selector visual | 8 / 9 |
-| 7 · MEJ-006 · Portapapeles | 5 / 6 |
-| 8 · MEJ-007 · Historial | 0 / 8 |
+| 3 · MEJ-002 · Esqueleto y ejecutable | 7 / 7 |
+| 4 · MEJ-003 · Modelo de color y formatos | 8 / 8 |
+| 5 · MEJ-004 · Cuentagotas de pantalla | 9 / 9 |
+| 6 · MEJ-005 · Selector visual | 9 / 9 |
+| 7 · MEJ-006 · Portapapeles | 6 / 6 |
+| 8 · MEJ-007 · Historial | 11 / 12 |
 | 9 · MEJ-008 · Paletas de color | 0 / 9 |
 | 10 · Primera versión | 0 / 2 |
-| **Total** | **56 / 80** |
+| **Total** | **72 / 84** |
 
 ---
 
@@ -105,7 +105,7 @@ Spec `specs/app-shell/spec.md` · prefijo `APP`.
 | T-027 | Implementar la ventana principal | IA | *Implementar* (con `pytest-qt`) + `uv run pxls` abre la ventana. | ✅ |
 | T-028 | Implementar el empaquetado | IA | *Implementar* + un comando genera `pxls.exe`, el ejecutable supera la prueba de humo y el empaquetado forma parte de la verificación completa. | ✅ |
 | T-029 | Cerrar MEJ-002 | IA | Criterio estándar *Cerrar*. | ✅ |
-| T-030 | Integrar MEJ-002 | Bartosz | Criterio estándar *Integrar*. Al posponerse, va en el mismo commit que T-038, T-047 y T-056. | ⬜ |
+| T-030 | Integrar MEJ-002 | Bartosz | Criterio estándar *Integrar*. Al posponerse, va en el mismo commit que T-038, T-047 y T-056. | ✅ |
 
 ## Fase 4 · MEJ-003 · Modelo de color y formatos
 
@@ -120,7 +120,7 @@ Spec `specs/color-model/spec.md` · prefijo `COLOR`.
 | T-035 | Implementar HSL | IA | *Implementar* + ejemplos y propiedad de ida y vuelta RGB ↔ HSL dentro de la tolerancia aprobada. | ✅ |
 | T-036 | Implementar HSV | IA | *Implementar* + ejemplos y propiedad de ida y vuelta RGB ↔ HSV dentro de la tolerancia aprobada. | ✅ |
 | T-037 | Cerrar MEJ-003 | IA | Criterio estándar *Cerrar*, con cobertura de `core` ≥ 95 %. | ✅ |
-| T-038 | Integrar MEJ-003 | Bartosz | Criterio estándar *Integrar*. Va en el mismo commit que T-030, T-047 y T-056. | ⬜ |
+| T-038 | Integrar MEJ-003 | Bartosz | Criterio estándar *Integrar*. Va en el mismo commit que T-030, T-047 y T-056. | ✅ |
 
 ## Fase 5 · MEJ-004 · Cuentagotas de pantalla
 
@@ -136,7 +136,7 @@ Spec `specs/screen-picker/spec.md` · prefijo `PICK`.
 | T-044 | Implementar la lupa | IA | *Implementar* + la lupa muestra la zona ampliada alrededor del cursor con el píxel central resaltado. | ✅ |
 | T-045 | Implementar el panel del color actual | IA | *Implementar* + la ventana muestra la muestra del color y sus valores en los cuatro formatos, y se actualiza al capturar. | ✅ |
 | T-046 | Cerrar MEJ-004 | IA | Criterio estándar *Cerrar*. | ✅ |
-| T-047 | Integrar MEJ-004 | Bartosz | Criterio estándar *Integrar*. Va en el mismo commit que T-030, T-038 y T-056. | ⬜ |
+| T-047 | Integrar MEJ-004 | Bartosz | Criterio estándar *Integrar*. Va en el mismo commit que T-030, T-038 y T-056. | ✅ |
 
 ## Fase 6 · MEJ-005 · Selector visual
 
@@ -152,7 +152,7 @@ Spec `specs/visual-picker/spec.md` · prefijo `SEL`.
 | T-053 | Implementar la edición manual de valores, si la spec la incluye | IA | *Implementar* + un valor válido escrito en cualquier formato cambia el color, y uno inválido se rechaza según la spec. | ✅ |
 | T-054 | Implementar la sincronía con el color actual | IA | *Implementar* + capturar con el cuentagotas actualiza el selector, y mover el selector actualiza el panel del color actual. | ✅ |
 | T-055 | Cerrar MEJ-005 | IA | Criterio estándar *Cerrar*. | ✅ |
-| T-056 | Integrar MEJ-005 | Bartosz | Criterio estándar *Integrar*. Va en el mismo commit que T-030, T-038 y T-047. | ⬜ |
+| T-056 | Integrar MEJ-005 | Bartosz | Criterio estándar *Integrar*. Va en el mismo commit que T-030, T-038 y T-047. | ✅ |
 
 ## Fase 7 · MEJ-006 · Copiar al portapapeles
 
@@ -165,7 +165,7 @@ Spec `specs/clipboard/spec.md` · prefijo `CLIP`.
 | T-059 | Implementar el puerto y el adaptador de portapapeles | IA | *Implementar* + tests con un *fake* y un test de integración que escribe y lee el portapapeles de Windows. | ✅ |
 | T-060 | Implementar la acción de copiar | IA | *Implementar* + el texto copiado coincide con el formato elegido para todos los ejemplos de la spec, tanto con el botón como con el atajo. | ✅ |
 | T-061 | Cerrar MEJ-006 | IA | Criterio estándar *Cerrar*. | ✅ |
-| T-062 | Integrar MEJ-006 | Bartosz | Criterio estándar *Integrar*. Va en el mismo commit que T-030, T-038, T-047 y T-056. | ⬜ |
+| T-062 | Integrar MEJ-006 | Bartosz | Criterio estándar *Integrar*. Va en el mismo commit que T-030, T-038, T-047 y T-056. | ✅ |
 
 ## Fase 8 · MEJ-007 · Historial
 
@@ -173,13 +173,17 @@ Spec `specs/history/spec.md` · prefijo `HIST`.
 
 | ID | Tarea | Quién | Hecho cuando | Estado |
 |---|---|---|---|---|
-| T-063 | Redactar la spec en `draft` | IA | La spec cubre qué entra en el historial, el límite, los duplicados, el borrado, la recuperación de un color y la persistencia entre sesiones. | ⬜ |
-| T-064 | Aprobar la spec | Bartosz | Criterio estándar *Aprobar*. | ⬜ |
-| T-065 | Escribir el diseño | IA | `design.md` decide dónde y en qué formato se guarda el historial y cómo se trata un fichero dañado. | ⬜ |
-| T-066 | Implementar el historial en el dominio | IA | *Implementar* + límite, orden y duplicados según la spec, en `core`. | ⬜ |
-| T-067 | Implementar la persistencia del historial | IA | *Implementar* + guardar y volver a cargar desde una instancia nueva produce el mismo historial, y un fichero dañado se trata según la spec. | ⬜ |
-| T-068 | Implementar la vista del historial | IA | *Implementar* + elegir una entrada la convierte en el color actual. | ⬜ |
-| T-069 | Cerrar MEJ-007 | IA | Criterio estándar *Cerrar*. | ⬜ |
+| T-063 | Redactar la spec en `draft` | IA | La spec cubre qué entra en el historial, el límite, los duplicados, el borrado, la recuperación de un color y la persistencia entre sesiones. | ✅ |
+| T-064 | Aprobar la spec | Bartosz | Criterio estándar *Aprobar*. | ✅ |
+| T-065 | Escribir el diseño | IA | `design.md` decide dónde y en qué formato se guarda el historial y cómo se trata un fichero dañado. | ✅ |
+| T-066 | Implementar el historial en el dominio | IA | *Implementar* + límite, orden y duplicados según la spec, en `core`. | ✅ |
+| T-067 | Implementar la persistencia del historial | IA | *Implementar* + guardar y volver a cargar desde una instancia nueva produce el mismo historial, y un fichero dañado se trata según la spec. | ✅ |
+| T-068 | Implementar la vista del historial | IA | *Implementar* + elegir una entrada la convierte en el color actual. | ✅ |
+| T-069 | Cerrar MEJ-007 | IA | Criterio estándar *Cerrar*. | ✅ |
+| T-082 | Mover la muestra del color a la derecha de la barra de tono | IA | PICK-009 (`specs/screen-picker/spec.md`) aprobado con la nueva ubicación y en `implemented`, sus tests pasan y la verificación completa pasa. | ✅ |
+| T-083 | Redactar HIST-010 en `draft` | IA | `specs/history/spec.md` contiene HIST-010 (qué pasa si no se puede guardar el historial) en `draft`, con enunciado EARS y criterios con valores concretos. | ✅ |
+| T-084 | Aprobar HIST-010 | Bartosz | Criterio estándar *Aprobar*. | ✅ |
+| T-085 | Implementar HIST-010 | IA | *Implementar* + HIST-010 en `implemented` y la verificación completa pasa. | ✅ |
 | T-070 | Integrar MEJ-007 | Bartosz | Criterio estándar *Integrar*. | ⬜ |
 
 ## Fase 9 · MEJ-008 · Paletas de color
@@ -211,7 +215,30 @@ Spec `specs/palettes/spec.md` · prefijo `PAL`.
 
 Las entradas más recientes van primero.
 
-- 2026-10-25 · Primer intento del commit de las fases 3 a 7 rechazado por el hook (INV-7): el test que comprueba que se restaura el portapapeles fallaba si este contenía texto de varias líneas (`
+- 2026-10-25 · T-085 · Completada: HIST-010 en `implemented` (`HistorySaveError`, aviso único hasta volver a guardar bien, sustituye a «Copiado: …»); 8 tests nuevos. Verificación completa con 0 errores (130 s) y simulacro del commit con 0 errores en 24 ficheros.
+- 2026-10-25 · T-085 · Asignada a la IA.
+- 2026-10-25 · T-084 · Completada: Bartosz aprueba HIST-010 en `specs/history/spec.md`, que pasa a `approved`.
+- 2026-10-25 · T-083 · Completada: HIST-010 en `draft` en `specs/history/spec.md`, con 5 criterios. Los avisos de HIST-008 dejan de incluir el mensaje de error del sistema (APP-006).
+- 2026-10-25 · T-083 · Creada y asignada a la IA a petición de Bartosz, junto con T-084 y T-085: especificar qué pasa si no se puede guardar el historial.
+- 2026-10-25 · T-082 · Completada: la muestra del color actual va a la derecha de la barra de tono (149 × 181 px en Windows) y PICK-009 está en `implemented`; el contenido baja a 697 px de alto. Verificación completa con 0 errores (126 s) y simulacro del commit con 0 errores en 24 ficheros.
+- 2026-10-25 · T-082 · Asignada a la IA. Bartosz aprueba el nuevo texto de PICK-009: la muestra del color actual pasa a la derecha de la barra de tono, con su alto y el ancho que queda hasta el borde.
+- 2026-10-25 · T-082 · Creada a petición de Bartosz: mover la muestra del color a la derecha de la barra de tono.
+- 2026-10-25 · T-069 · Completada: HIST-001 a HIST-009 y APP-003 en `implemented`, MEJ-007 fuera de `mejoras.md`, verificación completa con 0 errores (169 s) y simulacro del commit `behavior` con 0 errores en 18 ficheros.
+- 2026-10-25 · T-069 · Asignada a la IA.
+- 2026-10-25 · T-068 · Completada: pestaña «Historial» (`pxls/ui/history_view.py`) con 2 × 10 muestras de 24 px, pista con el HEX, «Quitar del historial» y «Vaciar historial» con confirmación; elegir una entrada la convierte en el color actual sin reordenar. Ventana de 420 × 780: en Windows el contenido ocupa 751 de 759 px, sin desplazamiento.
+- 2026-10-25 · T-068 · Asignada a la IA.
+- 2026-10-25 · T-067 · Completada: `HistoryFile` en `pxls/adapters/history_file.py` (escritura atómica, copia con fecha del fichero dañado, sin escribir encima de uno ilegible); 12 tests en `tests/history/test_history_file.py`.
+- 2026-10-25 · T-067 · Asignada a la IA.
+- 2026-10-25 · T-066 · Completada: `History` en `pxls/core/history.py` (orden, límite de 20, duplicados, quitar y vaciar) y su formato JSON; 25 tests en `tests/history/test_history.py`.
+- 2026-10-25 · T-066 · Asignada a la IA.
+- 2026-10-25 · T-065 · Completada: `specs/history/design.md` (JSON en `%APPDATA%\pxls\history.json`, escritura atómica en cada cambio, copia con fecha del fichero dañado).
+- 2026-10-25 · T-065 · Asignada a la IA.
+- 2026-10-25 · T-064 · Completada: Bartosz acepta las 5 propuestas; `specs/history/spec.md` sin dudas y sus 9 requisitos en `approved`. APP-003 pasa a 420 × 780 y vuelve a `approved` hasta implementarse.
+- 2026-10-25 · T-063 · Completada: `specs/history/spec.md` con 9 requisitos en `draft` (qué entra, orden, límite, duplicados, recuperar, quitar y vaciar, conservar entre sesiones, fichero dañado y ubicación) y 5 dudas abiertas; el contenido de la ventana ya ocupa 613 de 640 px, por lo que se propone una pestaña y 420 × 780.
+- 2026-10-25 · T-063 · Asignada a la IA (fase 8).
+- 2026-10-25 · T-030, T-038, T-047, T-056 y T-062 · Completadas: commit `28781c0` en `dev` (`Change-Type: behavior`, 46 requisitos de las fases 3 a 7), aceptado por los hooks. Fases 3 a 7 cerradas.
+- 2026-10-25 · Primer intento del commit de las fases 3 a 7 rechazado por el hook (INV-7): el test que comprueba que se restaura el portapapeles fallaba si este contenía texto de varias líneas (`
+
 ` frente a `
 `). Corregida la sonda: guarda y restaura todos los formatos del portapapeles y compara sin tener en cuenta los saltos de línea; comprobado con texto de varias líneas, de una línea, vacío y con una imagen.
 - 2026-10-25 · T-061 · Completada: los 5 requisitos de `specs/clipboard/spec.md` en `implemented`, MEJ-006 fuera de `mejoras.md`, verificación completa con 0 errores en 123 s (cobertura total 93 %, `core` 99 %); los 8 criterios de CLIP tienen test.

@@ -1,6 +1,6 @@
 """Modo cuentagotas y color actual, sin depender de la interfaz.
 
-Spec: PICK-002, PICK-004, PICK-005, PICK-006, PICK-010
+Spec: PICK-002, PICK-004, PICK-005, PICK-006, PICK-010, HIST-001
 """
 
 from collections.abc import Callable
@@ -36,14 +36,18 @@ class PickerSession:
         self.screenshot = self.grabber.grab()
         return self.screenshot
 
-    def capture(self) -> Color:
-        """Toma el color del píxel bajo el cursor y sale del modo (PICK-004)."""
+    def capture(self) -> Color | None:
+        """Toma el color del píxel bajo el cursor y sale del modo (PICK-004).
+
+        Devuelve el color capturado, o ``None`` si el cursor no estaba sobre ninguna pantalla.
+        """
+        color = None
         if self.screenshot is not None:
             color = self.screenshot.color_at(self.pointer.position())
             self.screenshot = None
             if color is not None:
                 self.set_current(color)
-        return self.current
+        return color
 
     def cancel(self) -> None:
         """Sale del modo sin cambiar el color actual (PICK-005)."""

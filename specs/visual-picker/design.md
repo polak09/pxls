@@ -35,3 +35,5 @@ Cuando el color llega de fuera (cuentagotas, HEX, campos RGB):
 ## Medidas
 
 Comprobado con un boceto en la plataforma real: con el cuadrado a 220 × 180 px, siete filas de barra y campo, una muestra de 48 px y las cuatro filas de formatos, el contenido necesita 581 px de alto.
+
+Desde que la muestra del color actual ocupa el hueco a la derecha de la barra de tono (PICK-009), con 181 px de alto y unos 149 px de ancho con la ventana de 420 px, ya no suma alto propio: con la pestaña del historial, el contenido necesita 697 px.

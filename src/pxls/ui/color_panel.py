@@ -1,5 +1,7 @@
 """Panel del color actual: muestra, cuatro formatos con su botón «Copiar» y HEX editable.
 
+La muestra no va en la rejilla del panel: la ventana la coloca a la derecha de la barra de tono.
+
 Spec: PICK-009, PICK-010, SEL-007, CLIP-001
 """
 
@@ -7,12 +9,19 @@ from functools import partial
 
 from PySide6.QtCore import Qt, Signal
 from PySide6.QtGui import QColor, QPalette
-from PySide6.QtWidgets import QFrame, QGridLayout, QLabel, QLineEdit, QPushButton, QWidget
+from PySide6.QtWidgets import (
+    QFrame,
+    QGridLayout,
+    QLabel,
+    QLineEdit,
+    QPushButton,
+    QSizePolicy,
+    QWidget,
+)
 
 from pxls.core.color import Color, ColorError
 from pxls.core.formatting import FORMATS
 
-SWATCH_HEIGHT = 48
 _ERROR_STYLE = "color: #C62828;"
 
 
@@ -25,12 +34,12 @@ class ColorPanel(QWidget):
     def __init__(self, parent: QWidget | None = None) -> None:
         """Crea el panel vacío; ``show_color`` le da su primer color."""
         super().__init__(parent)
-        self.swatch = QFrame(self)
-        self.swatch.setMinimumHeight(SWATCH_HEIGHT)
+        expanding = QSizePolicy.Policy.Expanding
+        self.swatch = QFrame()
+        self.swatch.setSizePolicy(expanding, expanding)
         self.swatch.setAutoFillBackground(True)
         layout = QGridLayout(self)
         layout.setContentsMargins(0, 0, 0, 0)
-        layout.addWidget(self.swatch, 0, 0, 1, 3)
         layout.setColumnStretch(1, 1)
         self.hex_field = QLineEdit(self)
         self.hex_field.returnPressed.connect(self._enter_hex)
@@ -39,7 +48,7 @@ class ColorPanel(QWidget):
         self.error.hide()
         self._values: dict[str, QLabel | QLineEdit] = {}
         self.copy_buttons: dict[str, QPushButton] = {}
-        row = 1
+        row = 0
         for name in FORMATS:
             value: QLabel | QLineEdit = self.hex_field
             if name != "HEX":

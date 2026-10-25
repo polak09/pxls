@@ -21,12 +21,6 @@ Backlog de funcionalidades y mejoras **todavía no implementadas**. Este fichero
 
 ---
 
-## MEJ-007 · Historial
-
-- **Qué:** recordar los últimos colores elegidos, también entre sesiones.
-- **Por qué:** recuperar un color sin tener que volver a capturarlo.
-- **Dudas:** cuántos colores; si se guardan duplicados; si se puede borrar.
-
 ## MEJ-008 · Paletas de color
 
 - **Qué:** crear, nombrar, editar y guardar paletas de colores.

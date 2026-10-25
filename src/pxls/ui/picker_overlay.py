@@ -1,6 +1,6 @@
 """Ventanas superpuestas del modo cuentagotas, una por pantalla.
 
-Spec: PICK-001, PICK-002, PICK-003, PICK-004, PICK-005, PICK-006
+Spec: PICK-001, PICK-002, PICK-003, PICK-004, PICK-005, PICK-006, HIST-001
 """
 
 from PySide6.QtCore import QObject, QRect, Qt, Signal
@@ -56,6 +56,7 @@ class PickerController(QObject):
     """Abre y cierra las ventanas superpuestas y traduce sus eventos a la sesión."""
 
     finished = Signal()
+    captured = Signal(Color)
 
     def __init__(self, session: PickerSession) -> None:
         """Crea el controlador del modo cuentagotas de ``session``."""
@@ -86,9 +87,11 @@ class PickerController(QObject):
         focused.setFocus()
 
     def capture(self) -> None:
-        """Captura el color bajo el cursor y cierra el modo (PICK-004)."""
-        self.session.capture()
+        """Captura el color bajo el cursor y cierra el modo (PICK-004); avisa con ``captured``."""
+        color = self.session.capture()
         self._close()
+        if color is not None:
+            self.captured.emit(color)
 
     def cancel(self) -> None:
         """Cierra el modo sin cambiar el color actual (PICK-005)."""

@@ -49,9 +49,9 @@ Que `pxls` exista como aplicación de escritorio desde la primera versión: arra
 ### APP-003 · Tamaño de la ventana
 
 - **Estado:** implemented
-- **Enunciado (EARS):** Cuando se abra la ventana principal, el sistema deberá mostrarla con un tamaño inicial de 420 × 640 píxeles lógicos, deberá permitir redimensionarla, no deberá permitir reducirla por debajo de 360 × 480 píxeles lógicos y, cuando sea más baja que su contenido, deberá mostrar una barra de desplazamiento vertical.
+- **Enunciado (EARS):** Cuando se abra la ventana principal, el sistema deberá mostrarla con un tamaño inicial de 420 × 780 píxeles lógicos, deberá permitir redimensionarla, no deberá permitir reducirla por debajo de 360 × 480 píxeles lógicos y, cuando sea más baja que su contenido, deberá mostrar una barra de desplazamiento vertical.
 - **Criterios de aceptación:**
-  1. Dada la aplicación recién iniciada, cuando se mide la ventana principal, entonces mide 420 × 640 píxeles lógicos.
+  1. Dada la aplicación recién iniciada, cuando se mide la ventana principal, entonces mide 420 × 780 píxeles lógicos.
   2. Dada la ventana principal, cuando se redimensiona a 300 × 300, entonces mide 360 × 480.
   3. Dada la ventana principal, cuando se redimensiona a 600 × 700, entonces mide 600 × 700.
   4. Dada la ventana principal de 360 × 480, cuando se observa, entonces muestra una barra de desplazamiento vertical que da acceso a todo su contenido.

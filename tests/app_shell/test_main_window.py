@@ -4,7 +4,7 @@ from importlib.metadata import version
 import pytest
 from PySide6.QtCore import QSize, QTimer
 from PySide6.QtGui import QAction, QIcon
-from PySide6.QtWidgets import QAbstractButton, QDialogButtonBox, QLabel, QWidget
+from PySide6.QtWidgets import QAbstractButton, QDialogButtonBox, QLabel, QTabWidget, QWidget
 from pytestqt.qtbot import QtBot
 
 from pxls.core.picker import PickerSession
@@ -23,6 +23,8 @@ SPANISH_TEXTS = {
     "Saturación",
     "Valor",
     "Alfa",
+    "Historial",
+    "Vaciar historial",
 }
 FORMAT_NAMES = {"HEX", "RGB", "HSL", "HSV"}
 COLOR_TEXT = re.compile(r"^(#[0-9A-F]{8}|(rgb|hsl|hsv)a?\(.*\))$")
@@ -40,6 +42,8 @@ def visible_texts(widget: QWidget) -> set[str]:
     texts |= {label.text() for label in widget.findChildren(QLabel) if label.text()}
     texts |= {action.text() for action in widget.findChildren(QAction) if action.text()}
     texts |= {button.text() for button in widget.findChildren(QAbstractButton) if button.text()}
+    for tabs in widget.findChildren(QTabWidget):
+        texts |= {tabs.tabText(index) for index in range(tabs.count())}
     return texts
 
 
@@ -55,10 +59,10 @@ def test_window_title_is_pxls(qtbot: QtBot) -> None:
 
 
 @pytest.mark.spec("APP-003")
-def test_window_opens_at_420_by_640(qtbot: QtBot) -> None:
+def test_window_opens_at_420_by_780(qtbot: QtBot) -> None:
     shown = window(qtbot)
     shown.show()
-    assert shown.size() == QSize(420, 640)
+    assert shown.size() == QSize(420, 780)
 
 
 @pytest.mark.spec("APP-003")
