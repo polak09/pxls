@@ -25,6 +25,14 @@ SPANISH_TEXTS = {
     "Alfa",
     "Historial",
     "Vaciar historial",
+    "Paletas",
+    "Paleta",
+    "Añadir color actual",
+    "Nueva paleta…",
+    "Renombrar…",
+    "Borrar…",
+    "Importar…",
+    "Exportar…",
 }
 FORMAT_NAMES = {"HEX", "RGB", "HSL", "HSV"}
 COLOR_TEXT = re.compile(r"^(#[0-9A-F]{8}|(rgb|hsl|hsv)a?\(.*\))$")

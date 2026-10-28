@@ -1,6 +1,6 @@
 """Arranque, idioma, bucle de eventos y prueba de humo de pxls.
 
-Spec: APP-001, APP-004, APP-006, APP-007, APP-009, HIST-007
+Spec: APP-001, APP-004, APP-006, APP-007, APP-009, HIST-007, PAL-011
 """
 
 import sys
@@ -10,6 +10,7 @@ from PySide6.QtCore import QLibraryInfo, QLocale, QTranslator
 from PySide6.QtWidgets import QApplication
 
 from pxls.adapters.history_file import HistoryFile, default_history_path
+from pxls.adapters.palettes_file import PalettesFile, default_palettes_path
 from pxls.ui.main_window import TITLE, MainWindow, app_icon
 
 SMOKE_TEST = "--smoke-test"
@@ -39,7 +40,7 @@ def run(app: QApplication, window: MainWindow) -> int:
 def smoke_test(argv: Sequence[str]) -> int:
     """Arranca la aplicación sin mostrar la ventana; devuelve 0 si lo consigue (APP-009).
 
-    No usa el historial guardado: la prueba de humo no lee ni escribe datos del usuario.
+    No usa el historial ni las paletas guardados: la prueba de humo no toca datos del usuario.
     """
     try:
         app = create_app(argv)
@@ -59,4 +60,8 @@ def main(argv: Sequence[str] | None = None) -> int:
     if SMOKE_TEST in arguments:
         return smoke_test(arguments)
     application = create_app(arguments)
-    return run(application, MainWindow(history_store=HistoryFile(default_history_path())))
+    window = MainWindow(
+        history_store=HistoryFile(default_history_path()),
+        palettes_store=PalettesFile(default_palettes_path()),
+    )
+    return run(application, window)

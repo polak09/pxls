@@ -21,12 +21,6 @@ Backlog de funcionalidades y mejoras **todavía no implementadas**. Este fichero
 
 ---
 
-## MEJ-008 · Paletas de color
-
-- **Qué:** crear, nombrar, editar y guardar paletas de colores.
-- **Por qué:** organizar los colores de un proyecto.
-- **Dudas:** número de paletas y de colores por paleta; reordenar colores; exportar e importar (y en qué formatos).
-
 ## MEJ-009 · `spec-anchor`: proteger también los ficheros auxiliares de los tests
 
 - **Qué:** que las reglas de clase traten `conftest.py` y los módulos auxiliares bajo `tests/` como ficheros de test.

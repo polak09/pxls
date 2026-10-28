@@ -303,7 +303,7 @@ def test_the_history_tab_is_below_the_colour_panel(qtbot: QtBot) -> None:
     panel_bottom = window.panel.mapTo(viewport, QPoint(0, window.panel.height())).y()
     tabs_top = window.tabs.mapTo(viewport, QPoint(0, 0)).y()
     assert panel_bottom <= tabs_top
-    assert [window.tabs.tabText(index) for index in range(window.tabs.count())] == ["Historial"]
+    assert window.tabs.tabText(0) == "Historial"
     assert window.tabs.currentWidget() is window.history_view
 
 

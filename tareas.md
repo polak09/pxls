@@ -31,8 +31,8 @@ Hasta que existan `spec-anchor` y los hooks (T-019 a T-021), la verificación es
 ## Dónde estamos
 
 - **En curso:** —
-- **Siguiente:** T-070 (Bartosz): probar el historial y la nueva muestra con `uv run pxls` y hacer el commit de la fase 8.
-- **Bloqueos:** —
+- **Siguiente:** T-079 (Bartosz): probar las paletas con `uv run pxls` y hacer el commit de la fase 9; después T-086 (IA).
+- **Bloqueos:** T-086 espera a T-079: el refactor va en un commit propio, después del de las paletas.
 
 | Fase | Hechas |
 |---|---|
@@ -44,10 +44,10 @@ Hasta que existan `spec-anchor` y los hooks (T-019 a T-021), la verificación es
 | 5 · MEJ-004 · Cuentagotas de pantalla | 9 / 9 |
 | 6 · MEJ-005 · Selector visual | 9 / 9 |
 | 7 · MEJ-006 · Portapapeles | 6 / 6 |
-| 8 · MEJ-007 · Historial | 11 / 12 |
-| 9 · MEJ-008 · Paletas de color | 0 / 9 |
+| 8 · MEJ-007 · Historial | 12 / 12 |
+| 9 · MEJ-008 · Paletas de color | 8 / 11 |
 | 10 · Primera versión | 0 / 2 |
-| **Total** | **72 / 84** |
+| **Total** | **81 / 86** |
 
 ---
 
@@ -184,7 +184,7 @@ Spec `specs/history/spec.md` · prefijo `HIST`.
 | T-083 | Redactar HIST-010 en `draft` | IA | `specs/history/spec.md` contiene HIST-010 (qué pasa si no se puede guardar el historial) en `draft`, con enunciado EARS y criterios con valores concretos. | ✅ |
 | T-084 | Aprobar HIST-010 | Bartosz | Criterio estándar *Aprobar*. | ✅ |
 | T-085 | Implementar HIST-010 | IA | *Implementar* + HIST-010 en `implemented` y la verificación completa pasa. | ✅ |
-| T-070 | Integrar MEJ-007 | Bartosz | Criterio estándar *Integrar*. | ⬜ |
+| T-070 | Integrar MEJ-007 | Bartosz | Criterio estándar *Integrar*. | ✅ |
 
 ## Fase 9 · MEJ-008 · Paletas de color
 
@@ -192,15 +192,17 @@ Spec `specs/palettes/spec.md` · prefijo `PAL`.
 
 | ID | Tarea | Quién | Hecho cuando | Estado |
 |---|---|---|---|---|
-| T-071 | Redactar la spec en `draft` | IA | La spec cubre crear, renombrar y borrar paletas; añadir, quitar y reordenar colores; límites; persistencia; y exportar e importar si procede. | ⬜ |
-| T-072 | Aprobar la spec | Bartosz | Criterio estándar *Aprobar*. | ⬜ |
-| T-073 | Escribir el diseño | IA | `design.md` decide el formato de almacenamiento y, si procede, los formatos de exportación. | ⬜ |
-| T-074 | Implementar las paletas en el dominio | IA | *Implementar* + todas las operaciones de la spec, en `core`. | ⬜ |
-| T-075 | Implementar la persistencia de paletas | IA | *Implementar* + guardar y volver a cargar desde una instancia nueva produce las mismas paletas. | ⬜ |
-| T-076 | Implementar la vista de paletas | IA | *Implementar* + todas las operaciones de la spec se pueden hacer desde la interfaz. | ⬜ |
-| T-077 | Implementar exportar e importar, si la spec lo incluye | IA | *Implementar* + exportar e importar de nuevo produce la misma paleta en cada formato aprobado. | ⬜ |
-| T-078 | Cerrar MEJ-008 | IA | Criterio estándar *Cerrar*. | ⬜ |
+| T-071 | Redactar la spec en `draft` | IA | La spec cubre crear, renombrar y borrar paletas; añadir, quitar y reordenar colores; límites; persistencia; y exportar e importar si procede. | ✅ |
+| T-072 | Aprobar la spec | Bartosz | Criterio estándar *Aprobar*. | ✅ |
+| T-073 | Escribir el diseño | IA | `design.md` decide el formato de almacenamiento y, si procede, los formatos de exportación. | ✅ |
+| T-074 | Implementar las paletas en el dominio | IA | *Implementar* + todas las operaciones de la spec, en `core`. | ✅ |
+| T-075 | Implementar la persistencia de paletas | IA | *Implementar* + guardar y volver a cargar desde una instancia nueva produce las mismas paletas. | ✅ |
+| T-076 | Implementar la vista de paletas | IA | *Implementar* + todas las operaciones de la spec se pueden hacer desde la interfaz. | ✅ |
+| T-077 | Implementar exportar e importar, si la spec lo incluye | IA | *Implementar* + exportar e importar de nuevo produce la misma paleta en cada formato aprobado. | ✅ |
+| T-078 | Cerrar MEJ-008 | IA | Criterio estándar *Cerrar*. | ✅ |
 | T-079 | Integrar MEJ-008 | Bartosz | Criterio estándar *Integrar*. | ⬜ |
+| T-086 | Compartir con el historial el fichero de datos, el error de guardado y la muestra | IA | `HistoryFile` usa `DataFile`, `HistorySaveError` hereda de `SaveError` y el historial usa `Swatch`; la suite pasa sin cambiar lo que afirman los tests y el simulacro del commit `refactor` da 0 errores. | ⬜ |
+| T-087 | Integrar el refactor de T-086 | Bartosz | `dev` contiene el commit `refactor` de T-086. | ⬜ |
 
 ## Fase 10 · Primera versión
 
@@ -215,6 +217,23 @@ Spec `specs/palettes/spec.md` · prefijo `PAL`.
 
 Las entradas más recientes van primero.
 
+- 2026-10-25 · T-078 · Completada: PAL-001 a PAL-016 en `implemented`, MEJ-008 fuera de `mejoras.md`, verificación completa con 0 errores y simulacro del commit `behavior` con 0 errores en 23 ficheros. El historial no se toca en este commit: compartir con él `DataFile`, `SaveError` y `Swatch` queda para el refactor T-086.
+- 2026-10-25 · T-086 y T-087 · Creadas: las reglas de clase no dejan que el commit `behavior` de las paletas toque los módulos del historial, así que el código compartido se unifica en un commit `refactor` aparte.
+- 2026-10-25 · T-078 · Asignada a la IA.
+- 2026-10-25 · T-077 · Completada: exportar a `.gpl` y `.txt` e importarlos (`pxls/adapters/palette_files.py` y el menú «Paleta»); exportar e importar de nuevo da la misma paleta en `.txt`, y en `.gpl` con sus colores opacos.
+- 2026-10-25 · T-077 · Asignada a la IA.
+- 2026-10-25 · T-076 · Completada: pestaña «Paletas» (`pxls/ui/palettes_view.py`) con lista, menú «Paleta», diálogo del nombre, rejilla con arrastre y menú del clic derecho, y «Añadir color actual»; muestra en `pxls/ui/swatch.py`. En Windows el contenido ocupa 729 de 759 px.
+- 2026-10-25 · T-076 · Asignada a la IA.
+- 2026-10-25 · T-075 · Completada: `PalettesFile` en `pxls/adapters/palettes_file.py` sobre el nuevo `DataFile` (`pxls/adapters/data_file.py`); guardar y recargar desde una instancia nueva da las mismas paletas.
+- 2026-10-25 · T-075 · Asignada a la IA.
+- 2026-10-25 · T-074 · Completada: `Palettes` en `pxls/core/palettes.py` (nombres, orden alfabético, activa tras borrar, añadir sin repetir, quitar, mover, límite de 20, importar con nombre libre) y `.gpl`/`.txt` en `pxls/core/palette_formats.py`; `SaveError` común en `pxls/core/storage.py`.
+- 2026-10-25 · T-074 · Asignada a la IA.
+- 2026-10-25 · T-073 · Completada: `specs/palettes/design.md` (JSON en `%APPDATA%\pxls\palettes.json`, `DataFile` compartido con el historial, `.gpl` y `.txt` en `core`, arrastre sin `QDrag`).
+- 2026-10-25 · T-073 · Asignada a la IA.
+- 2026-10-25 · T-072 · Completada: Bartosz acepta las 6 propuestas; `specs/palettes/spec.md` sin dudas, con los textos de los avisos concretados, y sus 16 requisitos en `approved`.
+- 2026-10-25 · T-071 · Completada: `specs/palettes/spec.md` con 16 requisitos PAL en `draft` y 6 dudas con propuesta (duplicados, reordenar, límites, formatos de exportación, nombre al importar y menú «Paleta»). Boceto en Windows: la pestaña cabe con 729 de 759 px.
+- 2026-10-25 · T-071 · Asignada a la IA.
+- 2026-10-25 · T-070 · Completada: Bartosz prueba la fase 8 con `uv run pxls` y la integra en `dev` (d4812dc). Fase 8 completa.
 - 2026-10-25 · T-085 · Completada: HIST-010 en `implemented` (`HistorySaveError`, aviso único hasta volver a guardar bien, sustituye a «Copiado: …»); 8 tests nuevos. Verificación completa con 0 errores (130 s) y simulacro del commit con 0 errores en 24 ficheros.
 - 2026-10-25 · T-085 · Asignada a la IA.
 - 2026-10-25 · T-084 · Completada: Bartosz aprueba HIST-010 en `specs/history/spec.md`, que pasa a `approved`.

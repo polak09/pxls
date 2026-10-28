@@ -2,9 +2,11 @@
 
 Spec: APP-002, APP-003, APP-004, APP-005, PICK-001, PICK-009, PICK-010, SEL-007, SEL-008,
     SEL-009, CLIP-001, CLIP-002, CLIP-003, CLIP-004, CLIP-005, HIST-001, HIST-005, HIST-007,
-    HIST-008, HIST-009, HIST-010
+    HIST-008, HIST-009, HIST-010, PAL-006, PAL-009, PAL-011, PAL-012, PAL-013, PAL-016
 """
 
+from collections.abc import Callable
+from functools import partial
 from importlib.metadata import version
 from importlib.resources import files
 from pathlib import Path
@@ -26,10 +28,13 @@ from pxls.adapters.qt_clipboard import QtClipboard
 from pxls.adapters.windows_screen import WindowsPointer, WindowsScreenGrabber
 from pxls.core.clipboard import Clipboard, ClipboardError, copy_color
 from pxls.core.color import Color
-from pxls.core.history import History, HistorySaveError, HistoryStore
+from pxls.core.history import History, HistorySaveError, HistoryStore, LoadedHistory
+from pxls.core.palettes import LoadedPalettes, Palettes, PalettesStore
 from pxls.core.picker import PickerSession
+from pxls.core.storage import SaveError
 from pxls.ui.color_panel import ColorPanel
 from pxls.ui.history_view import HistoryView
+from pxls.ui.palettes_view import PalettesView
 from pxls.ui.picker_overlay import PickerController
 from pxls.ui.selector import SelectorWidget
 
@@ -41,6 +46,12 @@ SHORTCUT_FORMAT = "HEX"
 CONFIRMATION_MS = 2000
 ERROR_MS = 4000
 WARNING_MS = 10000
+HISTORY_SAVE_WARNING = (
+    "No se ha podido guardar el historial en {location}; se conserva mientras pxls siga abierto."
+)
+PALETTES_SAVE_WARNING = (
+    "No se han podido guardar las paletas en {location}; se conservan mientras pxls siga abierto."
+)
 
 
 def icon_path() -> Path:
@@ -54,7 +65,7 @@ def app_icon() -> QIcon:
 
 
 class MainWindow(QMainWindow):
-    """Ventana principal: cuentagotas, selector, color actual, copiar, historial y versión."""
+    """Ventana principal: cuentagotas, selector, color actual, copiar, historial y paletas."""
 
     def __init__(
         self,
@@ -62,8 +73,9 @@ class MainWindow(QMainWindow):
         session: PickerSession | None = None,
         clipboard: Clipboard | None = None,
         history_store: HistoryStore | None = None,
+        palettes_store: PalettesStore | None = None,
     ) -> None:
-        """Crea la ventana; sin ``history_store``, el historial sólo vive en memoria."""
+        """Crea la ventana; sin almacenes, el historial y las paletas sólo viven en memoria."""
         super().__init__()
         self.setWindowTitle(TITLE)
         self.setWindowIcon(app_icon())
@@ -85,19 +97,30 @@ class MainWindow(QMainWindow):
         session.on_change(self.panel.show_color)
         self.panel.hex_entered.connect(session.set_current)
         self.panel.copy_requested.connect(self.copy)
+        self._failed_saves: set[str] = set()
         # Sólo lo capturado, lo confirmado en el HEX y lo copiado entra en el historial (HIST-001).
         self.history_store = history_store
-        loaded = history_store.load() if history_store is not None else None
-        self.history = History(loaded.colors if loaded is not None else ())
-        self._save_failed = False
+        loaded_history = history_store.load() if history_store is not None else LoadedHistory(())
+        self.history = History(loaded_history.colors)
         if history_store is not None:
             self.history.on_change(self._save_history)
         self.picker.captured.connect(self.history.add)
         self.panel.hex_entered.connect(self.history.add)
         self.history_view = HistoryView(self.history)
         self.history_view.color_chosen.connect(session.set_current)
+        self.palettes_store = palettes_store
+        no_palettes = LoadedPalettes(Palettes())
+        loaded_palettes = palettes_store.load() if palettes_store is not None else no_palettes
+        self.palettes = loaded_palettes.palettes
+        if palettes_store is not None:
+            self.palettes.on_change(self._save_palettes)
+        self.palettes_view = PalettesView(self.palettes, lambda: session.current)
+        # Recuperar un color de una paleta no lo usa: no entra en el historial (PAL-009).
+        self.palettes_view.color_chosen.connect(session.set_current)
+        self.palettes_view.message.connect(self.statusBar().showMessage)
         self.tabs = QTabWidget()
         self.tabs.addTab(self.history_view, "Historial")
+        self.tabs.addTab(self.palettes_view, "Paletas")
         content = QWidget()
         layout = QVBoxLayout(content)
         layout.addWidget(self.pick_button)
@@ -113,8 +136,9 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(self.scroll_area)
         shown_version = app_version if app_version is not None else version("pxls")
         self.statusBar().addPermanentWidget(QLabel(f"v{shown_version}"))
-        if loaded is not None and loaded.warning is not None:
-            self.statusBar().showMessage(loaded.warning, WARNING_MS)
+        warnings = [w for w in (loaded_history.warning, loaded_palettes.warning) if w is not None]
+        if warnings:
+            self.statusBar().showMessage(" ".join(warnings), WARNING_MS)
 
     def copy(self, format_name: str) -> None:
         """Copia el color actual en un formato y lo confirma en la barra de estado."""
@@ -128,18 +152,22 @@ class MainWindow(QMainWindow):
         self.history.add(self.picker.session.current)
 
     def _save_history(self, entries: tuple[Color, ...]) -> None:
-        """Guarda el historial; si falla, avisa una vez hasta que se vuelva a guardar (HIST-010)."""
-        if self.history_store is None:
-            return
+        if self.history_store is not None:
+            save = partial(self.history_store.save, entries)
+            self._save("history", save, HISTORY_SAVE_WARNING)
+
+    def _save_palettes(self) -> None:
+        if self.palettes_store is not None:
+            save = partial(self.palettes_store.save, self.palettes)
+            self._save("palettes", save, PALETTES_SAVE_WARNING)
+
+    def _save(self, key: str, save: Callable[[], None], warning: str) -> None:
+        """Guarda; si falla, avisa una vez hasta que vuelva a guardar bien (HIST-010, PAL-013)."""
         try:
-            self.history_store.save(entries)
-        except HistorySaveError as error:
-            if not self._save_failed:
-                warning = (
-                    f"No se ha podido guardar el historial en {error.location}; "
-                    "se conserva mientras pxls siga abierto."
-                )
-                self.statusBar().showMessage(warning, WARNING_MS)
-            self._save_failed = True
+            save()
+        except (HistorySaveError, SaveError) as error:
+            if key not in self._failed_saves:
+                self.statusBar().showMessage(warning.format(location=error.location), WARNING_MS)
+            self._failed_saves.add(key)
             return
-        self._save_failed = False
+        self._failed_saves.discard(key)
