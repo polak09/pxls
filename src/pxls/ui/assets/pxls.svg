@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <!-- Icono de pxls: un cuentagotas blanco sobre un cuadrado de color. Fuente de pxls.ico. -->
+  <rect x="8" y="8" width="240" height="240" rx="52" fill="#3A86FF"/>
+  <g transform="rotate(45 128 128)" fill="#FFFFFF">
+    <rect x="106" y="30" width="44" height="52" rx="18"/>
+    <rect x="92" y="78" width="72" height="20" rx="10"/>
+    <path d="M112 98 H144 V182 L128 214 L112 182 Z"/>
+    <path d="M120 162 H136 V182 L128 198 L120 182 Z" fill="#3A86FF"/>
+  </g>
+</svg>
