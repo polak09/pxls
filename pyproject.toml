@@ -1,6 +1,6 @@
 [project]
 name = "pxls"
-version = "0.0.0"
+version = "0.1.0"
 description = "Color picker de escritorio para Windows."
 readme = "README.md"
 license = "MIT"

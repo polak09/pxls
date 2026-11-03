@@ -9,6 +9,7 @@ from dataclasses import dataclass
 from typing import Protocol
 
 from pxls.core.color import Color, ColorError
+from pxls.core.storage import SaveError
 
 LIMIT = 20
 FORMAT_VERSION = 1
@@ -18,13 +19,8 @@ class HistoryFormatError(ValueError):
     """El texto guardado no es un historial válido."""
 
 
-class HistorySaveError(Exception):
+class HistorySaveError(SaveError):
     """No se ha podido guardar el historial en ``location`` (HIST-010)."""
-
-    def __init__(self, location: str) -> None:
-        """Guarda dónde se intentaba guardar el historial."""
-        super().__init__(location)
-        self.location = location
 
 
 class History:

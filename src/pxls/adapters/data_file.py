@@ -1,6 +1,6 @@
 """Ficheros de datos de pxls en el perfil: lectura, copia del fichero dañado y escritura atómica.
 
-Spec: PAL-011, PAL-012, PAL-013
+Spec: HIST-007, HIST-008, HIST-010, PAL-011, PAL-012, PAL-013
 """
 
 import os

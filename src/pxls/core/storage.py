@@ -1,6 +1,6 @@
 """Errores comunes de los datos que pxls guarda en el perfil del usuario.
 
-Spec: PAL-013
+Spec: HIST-010, PAL-013
 """
 
 

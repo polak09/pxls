@@ -31,8 +31,8 @@ Hasta que existan `spec-anchor` y los hooks (T-019 a T-021), la verificación es
 ## Dónde estamos
 
 - **En curso:** —
-- **Siguiente:** T-079 (Bartosz): probar las paletas con `uv run pxls` y hacer el commit de la fase 9; después T-086 (IA).
-- **Bloqueos:** T-086 espera a T-079: el refactor va en un commit propio, después del de las paletas.
+- **Siguiente:** T-087 (Bartosz): hacer el commit `refactor` de T-086, sin el icono ni el README; después los commits del icono y el README y el de la versión 0.1.0 (`pyproject.toml`, `uv.lock`, `CHANGELOG.md`); luego terminar T-080 (IA) y T-081 (Bartosz).
+- **Bloqueos:** T-080 (⛔) espera a que `dev` tenga los commits pendientes: la versión y las notas están listas, pero su criterio pide generar el `.exe` desde `dev`; en cuanto estén, se regenera y se pasa la prueba de humo.
 
 | Fase | Hechas |
 |---|---|
@@ -45,9 +45,9 @@ Hasta que existan `spec-anchor` y los hooks (T-019 a T-021), la verificación es
 | 6 · MEJ-005 · Selector visual | 9 / 9 |
 | 7 · MEJ-006 · Portapapeles | 6 / 6 |
 | 8 · MEJ-007 · Historial | 12 / 12 |
-| 9 · MEJ-008 · Paletas de color | 8 / 11 |
+| 9 · MEJ-008 · Paletas de color | 10 / 11 |
 | 10 · Primera versión | 0 / 2 |
-| **Total** | **81 / 86** |
+| **Total** | **83 / 86** |
 
 ---
 
@@ -200,15 +200,15 @@ Spec `specs/palettes/spec.md` · prefijo `PAL`.
 | T-076 | Implementar la vista de paletas | IA | *Implementar* + todas las operaciones de la spec se pueden hacer desde la interfaz. | ✅ |
 | T-077 | Implementar exportar e importar, si la spec lo incluye | IA | *Implementar* + exportar e importar de nuevo produce la misma paleta en cada formato aprobado. | ✅ |
 | T-078 | Cerrar MEJ-008 | IA | Criterio estándar *Cerrar*. | ✅ |
-| T-079 | Integrar MEJ-008 | Bartosz | Criterio estándar *Integrar*. | ⬜ |
-| T-086 | Compartir con el historial el fichero de datos, el error de guardado y la muestra | IA | `HistoryFile` usa `DataFile`, `HistorySaveError` hereda de `SaveError` y el historial usa `Swatch`; la suite pasa sin cambiar lo que afirman los tests y el simulacro del commit `refactor` da 0 errores. | ⬜ |
+| T-079 | Integrar MEJ-008 | Bartosz | Criterio estándar *Integrar*. | ✅ |
+| T-086 | Compartir con el historial el fichero de datos, el error de guardado y la muestra | IA | `HistoryFile` usa `DataFile`, `HistorySaveError` hereda de `SaveError` y el historial usa `Swatch`; la suite pasa sin cambiar lo que afirman los tests y el simulacro del commit `refactor` da 0 errores. | ✅ |
 | T-087 | Integrar el refactor de T-086 | Bartosz | `dev` contiene el commit `refactor` de T-086. | ⬜ |
 
 ## Fase 10 · Primera versión
 
 | ID | Tarea | Quién | Hecho cuando | Estado |
 |---|---|---|---|---|
-| T-080 | Preparar la primera versión | IA | El número de versión está decidido por Bartosz y aplicado en el proyecto, las notas de la versión están escritas y el `.exe` generado desde `dev` supera la prueba de humo. | ⬜ |
+| T-080 | Preparar la primera versión | IA | El número de versión está decidido por Bartosz y aplicado en el proyecto, las notas de la versión están escritas y el `.exe` generado desde `dev` supera la prueba de humo. | ⛔ |
 | T-081 | Publicar la primera versión en `main` | Bartosz | `main` contiene `git merge --no-ff dev`, la etiqueta `vX.Y.Z` existe y el `.exe` está adjunto a la versión en GitHub. | ⬜ |
 
 ---
@@ -217,6 +217,13 @@ Spec `specs/palettes/spec.md` · prefijo `PAL`.
 
 Las entradas más recientes van primero.
 
+- 2026-11-03 · T-080 · Bloqueada: versión 0.1.0 en `pyproject.toml` y `uv.lock`, notas en `CHANGELOG.md`, y `pxls.exe` generado desde la copia de trabajo con la prueba de humo en verde (2 s) y los 18 tests del esqueleto pasando. Falta generarlo desde `dev`, que todavía no tiene el refactor, el icono, el README ni la versión.
+- 2026-11-03 · T-080 · Asignada a la IA. Bartosz decide la versión 0.1.0 y que las notas vayan en `CHANGELOG.md`.
+- 2026-11-03 · T-079 · Comprobada a petición de Bartosz: `dev` contiene el único commit `a40013b` (2026-10-28) con las paletas, sus 23 ficheros coinciden con el simulacro de T-078, lleva `Change-Type: behavior` y `Spec-Refs` de PAL-001 a PAL-016, y las reglas del hook `commit-msg` vuelven a dar 0 errores sobre él.
+- 2026-11-03 · T-086 · Completada: `HistoryFile` usa `DataFile` y `data_folder`, `HistorySaveError` hereda de `SaveError` y `HistoryView` usa `Swatch` (desaparece `HistorySwatch`); `history_view` sigue ofreciendo `SWATCH_SIZE` y `COLUMNS`, así que ningún test cambia. Suite completa con 595 tests en verde y simulacro del commit `refactor` con 0 errores en 6 ficheros.
+- 2026-11-03 · T-086 · Asignada a la IA.
+- 2026-11-03 · README · Añadida a petición de Bartosz la sección «Ejecutar en local»: requisitos, `uv sync` y `uv run pxls`, cómo generar el `.exe` con PyInstaller y los comandos de comprobación.
+- 2026-11-03 · Icono · Simplificado a petición de Bartosz: `pxls.svg` pasa a ser un cuentagotas blanco sobre un único cuadrado azul (`#3A86FF`), sin los cuatro píxeles de color; `pxls.ico` regenerado con QtSvg en las mismas 7 resoluciones. Sigue cumpliendo APP-004; los 13 tests de la ventana pasan.
 - 2026-10-25 · T-078 · Completada: PAL-001 a PAL-016 en `implemented`, MEJ-008 fuera de `mejoras.md`, verificación completa con 0 errores y simulacro del commit `behavior` con 0 errores en 23 ficheros. El historial no se toca en este commit: compartir con él `DataFile`, `SaveError` y `Swatch` queda para el refactor T-086.
 - 2026-10-25 · T-086 y T-087 · Creadas: las reglas de clase no dejan que el commit `behavior` de las paletas toque los módulos del historial, así que el código compartido se unifica en un commit `refactor` aparte.
 - 2026-10-25 · T-078 · Asignada a la IA.

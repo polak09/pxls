@@ -1,6 +1,6 @@
-"""Muestra de color de 24 px para la rejilla de las paletas.
+"""Muestra de color de 24 px para las rejillas del historial y de las paletas.
 
-Spec: PAL-009, PAL-016
+Spec: HIST-005, PAL-009, PAL-016
 """
 
 from PySide6.QtCore import Qt
@@ -28,7 +28,7 @@ class Swatch(QAbstractButton):
         self.show_color(None)
 
     def show_color(self, color: Color | None) -> None:
-        """Muestra ``color``, o ninguno; su HEX es la pista de la muestra (PAL-009)."""
+        """Muestra ``color``, o ninguno; su HEX es la pista de la muestra (HIST-005, PAL-009)."""
         self.color = color
         self.setEnabled(color is not None)
         self.setToolTip(color.to_hex() if color is not None else "")
