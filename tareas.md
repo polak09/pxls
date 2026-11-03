@@ -31,8 +31,8 @@ Hasta que existan `spec-anchor` y los hooks (T-019 a T-021), la verificación es
 ## Dónde estamos
 
 - **En curso:** —
-- **Siguiente:** T-087 (Bartosz): hacer el commit `refactor` de T-086, sin el icono ni el README; después los commits del icono y el README y el de la versión 0.1.0 (`pyproject.toml`, `uv.lock`, `CHANGELOG.md`); luego terminar T-080 (IA) y T-081 (Bartosz).
-- **Bloqueos:** T-080 (⛔) espera a que `dev` tenga los commits pendientes: la versión y las notas están listas, pero su criterio pide generar el `.exe` desde `dev`; en cuanto estén, se regenera y se pasa la prueba de humo.
+- **Siguiente:** T-081 (Bartosz): publicar la versión 0.1.0 en `main`.
+- **Bloqueos:** —
 
 | Fase | Hechas |
 |---|---|
@@ -45,9 +45,9 @@ Hasta que existan `spec-anchor` y los hooks (T-019 a T-021), la verificación es
 | 6 · MEJ-005 · Selector visual | 9 / 9 |
 | 7 · MEJ-006 · Portapapeles | 6 / 6 |
 | 8 · MEJ-007 · Historial | 12 / 12 |
-| 9 · MEJ-008 · Paletas de color | 10 / 11 |
-| 10 · Primera versión | 0 / 2 |
-| **Total** | **83 / 86** |
+| 9 · MEJ-008 · Paletas de color | 11 / 11 |
+| 10 · Primera versión | 1 / 2 |
+| **Total** | **85 / 86** |
 
 ---
 
@@ -202,13 +202,13 @@ Spec `specs/palettes/spec.md` · prefijo `PAL`.
 | T-078 | Cerrar MEJ-008 | IA | Criterio estándar *Cerrar*. | ✅ |
 | T-079 | Integrar MEJ-008 | Bartosz | Criterio estándar *Integrar*. | ✅ |
 | T-086 | Compartir con el historial el fichero de datos, el error de guardado y la muestra | IA | `HistoryFile` usa `DataFile`, `HistorySaveError` hereda de `SaveError` y el historial usa `Swatch`; la suite pasa sin cambiar lo que afirman los tests y el simulacro del commit `refactor` da 0 errores. | ✅ |
-| T-087 | Integrar el refactor de T-086 | Bartosz | `dev` contiene el commit `refactor` de T-086. | ⬜ |
+| T-087 | Integrar el refactor de T-086 | Bartosz | `dev` contiene el commit `refactor` de T-086. | ✅ |
 
 ## Fase 10 · Primera versión
 
 | ID | Tarea | Quién | Hecho cuando | Estado |
 |---|---|---|---|---|
-| T-080 | Preparar la primera versión | IA | El número de versión está decidido por Bartosz y aplicado en el proyecto, las notas de la versión están escritas y el `.exe` generado desde `dev` supera la prueba de humo. | ⛔ |
+| T-080 | Preparar la primera versión | IA | El número de versión está decidido por Bartosz y aplicado en el proyecto, las notas de la versión están escritas y el `.exe` generado desde `dev` supera la prueba de humo. | ✅ |
 | T-081 | Publicar la primera versión en `main` | Bartosz | `main` contiene `git merge --no-ff dev`, la etiqueta `vX.Y.Z` existe y el `.exe` está adjunto a la versión en GitHub. | ⬜ |
 
 ---
@@ -217,6 +217,8 @@ Spec `specs/palettes/spec.md` · prefijo `PAL`.
 
 Las entradas más recientes van primero.
 
+- 2026-11-03 · T-080 · Completada: `pxls.exe` generado desde `dev` (`abb11b1`) supera la prueba de humo.
+- 2026-11-03 · T-087 · Completada: `dev` contiene `abb11b1`, que junta el refactor de T-086 con el icono, el README y la versión 0.1.0.
 - 2026-11-03 · T-080 · Bloqueada: versión 0.1.0 en `pyproject.toml` y `uv.lock`, notas en `CHANGELOG.md`, y `pxls.exe` generado desde la copia de trabajo con la prueba de humo en verde (2 s) y los 18 tests del esqueleto pasando. Falta generarlo desde `dev`, que todavía no tiene el refactor, el icono, el README ni la versión.
 - 2026-11-03 · T-080 · Asignada a la IA. Bartosz decide la versión 0.1.0 y que las notas vayan en `CHANGELOG.md`.
 - 2026-11-03 · T-079 · Comprobada a petición de Bartosz: `dev` contiene el único commit `a40013b` (2026-10-28) con las paletas, sus 23 ficheros coinciden con el simulacro de T-078, lleva `Change-Type: behavior` y `Spec-Refs` de PAL-001 a PAL-016, y las reglas del hook `commit-msg` vuelven a dar 0 errores sobre él.
